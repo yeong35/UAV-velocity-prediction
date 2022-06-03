@@ -4,14 +4,14 @@ import numpy as np
 import pandas as pd
 
 # file path
-big_fast_path = "./dataset/big_fast"
-big_slow_path = "./dataset/big_slow"
+big_fast_path = "./dataset/big_fast/"
+big_slow_path = "./dataset/big_slow/"
 
 # slow is 0, fast is 1
 def make_dataframe(path, UAV_model, label):
     fname_list = os.listdir(path)
     label = 1 if label == 'fast'  else 0
-    data = {"fname":fname_list, "model":UAV_model, "label":label}
+    data = {"fname":fname_list, "directory":path, "model":UAV_model, "label":label}
 
     return pd.DataFrame(data)
     
