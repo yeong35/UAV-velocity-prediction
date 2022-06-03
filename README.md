@@ -30,7 +30,7 @@ UAV (Unmanned Aerial Vehicle) can be abused by bad actors for malicious purposes
     - There are many research that uses a camera, radar, lidar, or microphones to detect a UAV. This research focuses on using one microphone to collect our data, as using a microphone is cheaper than the previously mentioned equipment and is easier to collect data with it.
 
 ## System Overview
-![overview img](./img/ppt_readme_image.png)
+![overview img](./img/ppt_readme_image0524.png)
 1. Microphone record slow sound and fast sound of UAV. The boundary of fast is 10 mph.
 2. Recorded sound is arranged by a label that slow or fast.
 3. The data extract feature uses various methods.
