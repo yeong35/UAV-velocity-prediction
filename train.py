@@ -65,7 +65,7 @@ wirter = SummaryWriter()
 for i in tqdm(range(EPOCHS)):
 
     # Train
-    loss_sum = 0
+    train_loss = 0
     true_labels = []
     pred_labels = []
     model.train()
@@ -78,7 +78,7 @@ for i in tqdm(range(EPOCHS)):
         pred_y = model(x)
 
         loss = criterion(pred_y, y)
-        loss_sum += loss.detach()
+        train_loss += loss.detach()
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -86,27 +86,33 @@ for i in tqdm(range(EPOCHS)):
         true_labels.extend(y.cpu().numpy())
         pred_labels.extend(np.around(pred_y.cpu().detach().numpy()))
 
-    auc = accuracy_score(true_labels, pred_labels)
+    train_auc = accuracy_score(true_labels, pred_labels)
 
     # Valid
+    valid_loss=0
+    true_labels=[]
+    pred_labels=[]
+    model.eval()
+
     for e_num, (x, y) in enumerate(val_loader):
         x, y = x.type(torch.FloatTensor).to(device), y.type(torch.FloatTensor).to(device)
 
         pred_y = model(x)
         loss = criterion(pred_y, y)
 
-        loss_sum += loss.detach()
+        valid_loss += loss.detach()
 
         true_labels.extend(y.cpu().numpy())
         pred_labels.extend(np.around(pred_y.cpu().detach().numpy()))
 
-    auc = accuracy_score(true_labels, pred_labels)
+    valid_auc = accuracy_score(true_labels, pred_labels)
     
     # wirter.add_scalar("")
+    print(f"train_loss : {train_loss:.2f} train_auc : {train_auc:.2f} valid_loss : {valid_loss:.2f} valid_auc : {valid_auc:.2f}")
 
-    if auc > best_auc:
+    if valid_auc > best_auc:
         best_pred = pred_labels
-        best_auc = auc
+        best_auc = valid_auc
         best_epoch = i
 
         if prev_model is not None:
