@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 
 class AudioUtil():
     def open(audio_file):
-        y, sr = torchaudio.load(audio_file)
+        y, sr = librosa.load(audio_file)
         return y, sr
 
     # data augmentation function
@@ -21,11 +21,8 @@ class AudioUtil():
         return y.roll(shift_amt), sr
     
     def MFCCs(y, sr):
-        y = y.cpu().detach().numpy()
         mfccs = librosa.feature.mfcc(y=y, sr=sr)
-        mfcc_scaled = np.mean(mfccs.T, axis=0)
-        return mfcc_scaled
-
+        return mfccs
 
 class CustomDataset(Dataset):
     def __init__(self, root, label):

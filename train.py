@@ -2,13 +2,14 @@ import numpy as np
 import pandas as pd
 import os
 from tqdm import tqdm
+import argparse
 
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score
 
-from model import ClassifireNN
+from model import ClassifireNN, ClassifireCNN
 from preprocess import CustomDataset
 from torch.utils.tensorboard import SummaryWriter
 
@@ -50,7 +51,7 @@ val_loader = DataLoader(val_dataset, batch_size=16)
 val_loader = DataLoader(val_dataset, batch_size=16)        
 
 
-model = ClassifireNN(drop_out=DROP_OUT).to(device)
+model = ClassifireCNN(drop_out=DROP_OUT).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 criterion = nn.BCELoss()
 
@@ -60,7 +61,7 @@ best_pred = []
 
 prev_model = None
 
-wirter = SummaryWriter()
+writer = SummaryWriter()
 
 for i in tqdm(range(EPOCHS)):
 
@@ -107,7 +108,13 @@ for i in tqdm(range(EPOCHS)):
 
     valid_auc = accuracy_score(true_labels, pred_labels)
     
-    # wirter.add_scalar("")
+    writer.add_scalar("train_loss", train_loss, global_step=i+1)
+    writer.add_scalar("train_auc", train_auc, global_step=i+1)
+    writer.add_scalar("valid_loss", valid_loss, global_step=i+1)
+    writer.add_scalar("valid_auc", valid_auc, global_step=i+1)
+
+    writer.flush()
+
     print(f"train_loss : {train_loss:.2f} train_auc : {train_auc:.2f} valid_loss : {valid_loss:.2f} valid_auc : {valid_auc:.2f}")
 
     if valid_auc > best_auc:
@@ -117,7 +124,8 @@ for i in tqdm(range(EPOCHS)):
 
         if prev_model is not None:
             os.remove(prev_model)
-        prev_model = f'cnn_model_{best_auc}.h5'
+        prev_model = f'./models/cnn_model_{best_auc}.h5'
         torch.save(model.state_dict(), prev_model)
 
+writer.close()
 print(f"best validation acc = {best_auc}, in epoch {best_epoch}")
