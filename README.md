@@ -17,13 +17,14 @@ Please reach out to me if you have any questions. Thanks. -->
 - [Novelty](#Novelty)
 - [System Overview](#system-overview)
 - [Environment Setting](#environment-setting)
+- [Usage](#usage)
 - [Project Period](#project-period)
 - [Authors](#Authors)
 
 ## Paper and presentation matrial
 All details of this project are explained on matrials listed below.
-<!-- - [MID-Paper](./PresentationAndPaper/mid_paper_060122.pdf)
-- [MID-Presentation](./PresentationAndPaper/mid_presentation_052722.pdf) -->
+- [MID-Paper](./PresentationAndPaper/mid_paper_060122.pdf)
+- [MID-Presentation](./PresentationAndPaper/mid_presentation_052722.pdf)
 
 ## Problem Statement
 UAV (Unmanned Aerial Vehicle) can be abused by bad actors for malicious purposes. One example is a kamikaze attack where a UAV crashed into one of the electrical grid in Pennsylvania in July 2020. There are many research that published how to detect malicious UAV using cameras, radars, and lidars. However, there is little research that predict UAV velocity. Using the previously mentioned equipment will be expensive. Therefore, a microphone will be used to collect the dataset. Then, that dataset will be used to predict if a UAV exceeds our given velocity boundary.
@@ -41,10 +42,7 @@ UAV (Unmanned Aerial Vehicle) can be abused by bad actors for malicious purposes
 3. The data extract feature uses various methods.
 4. SVM, Random Forest, LGBM was used for Machine Learning, and CNN was used for Deep Learning.
 
-
 ## Environment Setting
-
-You can download Python
 - Python 3.7.0
 - librosa 0.9.1
 - numpy 1.20.3
@@ -64,10 +62,28 @@ pip install sounddevice
 pip install wavio
 pip install sklearn
 pip install lightgbm
-
 ```
 
-
+## Usage
+## Training a model
+You can use wav file dataset collected in person. After colleting dataset, you can train a model with a command below.
+```
+python train.py
+```
+<!-- - example -->
+<!-- ```
+train.py -lr 0.5 -drop_out 0.3 -epochs 50 -dataset ./dataset/
+``` -->
+<!-- 
+## Inferencing with a trained model
+You can check the trained model accuracy with a command below.
+```
+python train.py --test --models [path]
+```
+- example
+```
+python train.py --test -models ./models/cnn_model_0.94
+``` -->
 ## Project Period
 April. 19, 2022 - August. 3, 2022
 
