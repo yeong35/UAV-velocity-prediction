@@ -22,7 +22,8 @@ class AudioUtil():
     
     def MFCCs(y, sr):
         mfccs = librosa.feature.mfcc(y=y, sr=sr)
-        return mfccs
+        mfccs_scaled = np.mean(mfccs.T, axis=0)
+        return mfccs_scaled
 
 class CustomDataset(Dataset):
     def __init__(self, root, label):
