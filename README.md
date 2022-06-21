@@ -68,22 +68,21 @@ pip install lightgbm
 ## Training a model
 You can use wav file dataset collected in person. After colleting dataset, you can train a model with a command below.
 ```
-python train.py
-```
-<!-- - example -->
-<!-- ```
-train.py -lr 0.5 -drop_out 0.3 -epochs 50 -dataset ./dataset/
-``` -->
-<!-- 
-## Inferencing with a trained model
-You can check the trained model accuracy with a command below.
-```
-python train.py --test --models [path]
+python train.py -lr [learning rate] -drop_out [drop out] -batch [batch] -epochs [training epoch] -dataset [dataset path]
 ```
 - example
 ```
-python train.py --test -models ./models/cnn_model_0.94
-``` -->
+train.py -lr 0.001 -drop_out 0.3 -batch 128 -epochs 50 -dataset ./dataset
+```
+## Inferencing with a trained model
+You can check the trained model accuracy with a command below.
+```
+python train.py --test -model_weights [path]
+```
+- example
+```
+python train.py --test -model_weights ./models/cnn_model_0.94
+```
 ## Project Period
 April. 19, 2022 - August. 3, 2022
 
