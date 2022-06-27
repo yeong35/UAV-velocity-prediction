@@ -1,3 +1,4 @@
+from datetime import datetime
 import numpy as np
 import pandas as pd
 import os
@@ -33,6 +34,7 @@ def parse_args():
     parser.add_argument("--test", dest='test',action="store_true", help="Use model test")
     parser.add_argument('-model_weights', dest='model_weights', help='model path', default='./models/cnn_model_1.0.h5')
     args = parser.parse_args()
+    
     return args
 
 args = parse_args()
@@ -54,9 +56,14 @@ print(f"test           : {args.test}")
 print(f"dataset        : {dataset}")
 print(SEPARATOR)
 
+# save model path
+eventid = f"{datetime.now().strftime('CNN-%Y.%m.%d')}_dropout_{dropout}_lr_{lr}"
+output_dir = "./models/" + eventid
+os.makedirs(output_dir, exist_ok=True)
+
 # file path
-big_fast_path = dataset+"/big_fast/"
-big_slow_path = dataset+"/big_slow/"
+big_fast_path = dataset+"/big_fast_3/"
+big_slow_path = dataset+"/big_slow_3/"
 
 #preprocess & load dataset
 slow_dataset = CustomDataset(big_slow_path, label = 0)
@@ -89,7 +96,7 @@ best_pred = []
 
 prev_model = None
 
-writer = SummaryWriter()
+writer = SummaryWriter(log_dir=output_dir)
 
 if not args.test:
 
@@ -154,7 +161,7 @@ if not args.test:
 
             if prev_model is not None:
                 os.remove(prev_model)
-            prev_model = f'./models/cnn_model_{best_auc}.h5'
+            prev_model = output_dir+f'/cnn_model_{best_auc}.h5'
             torch.save(model.state_dict(), prev_model)
 
     writer.close()
