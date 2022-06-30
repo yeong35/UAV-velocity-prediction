@@ -2,8 +2,10 @@ from datetime import datetime
 import numpy as np
 import pandas as pd
 import os
-from tqdm import tqdm
 import argparse
+from sklearn.metrics import classification_report
+from tqdm import tqdm
+
 
 import torch
 import torch.nn as nn
@@ -190,4 +192,4 @@ else:
         pred_labels.extend(np.around(pred_y.cpu().detach().numpy()))
 
     test_auc = accuracy_score(true_labels, pred_labels)
-    print("test :", test_auc)
+    print(classification_report(true_labels, pred_labels, target_names=["slow", "fast"]))
