@@ -9,15 +9,15 @@ from datetime import datetime
 freq = 44400
 
 # Recording duration in seconds
-duration = 10
+duration = 3
 
 # dataset_folder
-folder_name = "dataset/"
+folder_name = "dataset_3sec/"
 if not os.path.exists(folder_name):
 	os.mkdir(folder_name)
 
 # Save File
-for i in range(30):
+for i in range(250):
 	# to record audio from
 	# sound-device into a Numpy
 	recording = sd.rec(int(duration * freq),
