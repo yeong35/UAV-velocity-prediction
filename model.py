@@ -38,16 +38,6 @@ class ClassifireCNN(nn.Module):
         self.cnn1 = nn.Conv1d(in_channels=20, out_channels=8, kernel_size=5, padding=2)
         self.cnn2 = nn.Conv1d(in_channels=8, out_channels=4, kernel_size=5, padding=2)
         self.cnn3 = nn.Conv1d(in_channels=4, out_channels= 1, kernel_size=5, padding=2)
-
-        # self.pool1 = nn.MaxPool1d(4)
-        # self.pool2 = nn.MaxPool1d(5)
-        # self.pool3 = nn.MaxPool1d(5)
-
-        # self.fc1 = nn.Linear(4 * 128, 512)
-        # self.fc2 = nn.Linear(512, 128)
-        # self.fc3 = nn.Linear(128, 64)
-        # self.fc4 = nn.Linear(64, 32)
-        # self.fc5 = nn.Linear(32, 1)
         
         self.relu = nn.ReLU()
 
