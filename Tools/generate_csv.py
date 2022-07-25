@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 
 # file path
-big_fast_path = "./dataset/big_fast_3/"
-big_slow_path = "./dataset/big_slow_3/"
+big_fast_path = "./dataset/big_fast_0719/"
+big_slow_path = "./dataset/big_slow_0719/"
 
 # slow is 0, fast is 1
 def make_dataframe(path, UAV_model, label):

@@ -1,10 +1,8 @@
 import os
-import random
 import librosa
 import numpy as np
 
 import torch
-import torchaudio
 from torch.utils.data import Dataset
 
 
@@ -12,13 +10,6 @@ class AudioUtil():
     def open(audio_file):
         y, sr = librosa.load(audio_file)
         return y, sr
-
-    # data augmentation function
-    def time_shift(aud, shift_limit):
-        y, sr = aud
-        _, sig_len = y.shape
-        shift_amt = int(random.random() * shift_limit * sig_len)
-        return y.roll(shift_amt), sr
     
     def MFCCs(y, sr):
         mfccs = librosa.feature.mfcc(y=y, sr=sr)

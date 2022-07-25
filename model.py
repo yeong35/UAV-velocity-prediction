@@ -50,7 +50,6 @@ class ClassifireCNN(nn.Module):
         x = self.relu(self.cnn1(x))         # [batch, 8, 1]
         x = self.relu(self.cnn2(x))         # [batch, 4, 1]
         x = self.cnn3(x)                    # [batch, 1, 1]   
-
         x = torch.sigmoid(x)
 
         return x.view(-1)

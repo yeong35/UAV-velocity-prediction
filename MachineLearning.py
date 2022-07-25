@@ -6,9 +6,9 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import sklearn
-from sklearn.model_selection import train_test_split, cross_val_score, cross_validate
-from sklearn.metrics import confusion_matrix, plot_confusion_matrix
+
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from lightgbm import LGBMClassifier
@@ -18,8 +18,6 @@ print(Path.cwd())
 metadata = pd.read_csv(r'./information.csv') 
 #^^change directory if needed^^
 
-
-metadata.head()
 
 # function of feature extraction MFCCs
 def feature_extractor(file):
@@ -58,6 +56,14 @@ pred_y = svc.predict(X_test)
 
 plot = confusion_matrix(y_test, pred_y)
 
+### Show the result of SVM ###
+print("SVM")
+print("acc", accuracy_score(y_test, pred_y))
+print("pre", precision_score(y_test, pred_y))
+print("rec", recall_score(y_test, pred_y))
+print("f-1", f1_score(y_test, pred_y))
+print()
+
 #Setting the attributes
 fig, px = plt.subplots(figsize=(7.5, 7.5))
 px.matshow(plot, cmap=plt.cm.YlOrRd, alpha=0.5)
@@ -66,9 +72,11 @@ for m in range(plot.shape[0]):
         px.text(x=m,y=n,s=plot[m, n], va='center', ha='center', size='xx-large')
 
 # Sets the labels
-plt.xlabel('Predictions', fontsize=16)
-plt.ylabel('Actuals', fontsize=16)
-plt.title('SVM', fontsize=15)
+plt.xlabel('True label', fontsize=16)
+plt.ylabel('Predicted label', fontsize=16)
+plt.xticks([0, 1], ['Slow', 'Fast'])
+plt.yticks([0, 1], ['Slow', 'Fast'])
+plt.title('SVM', fontsize=20)
 plt.show() #need to close out of the matrix windows to continue to run
 
 ### RANDOM FOREST###
@@ -77,6 +85,14 @@ randomforest.fit(X_train, y_train)
 
 pred_y = randomforest.predict(X_test)
 
+### Show the result of Random Forest ###
+print("Random Forest")
+print("acc", accuracy_score(y_test, pred_y))
+print("pre", precision_score(y_test, pred_y))
+print("rec", recall_score(y_test, pred_y))
+print("f-1", f1_score(y_test, pred_y))
+print()
+
 plot = confusion_matrix(y_test, pred_y)
 
 fig, px = plt.subplots(figsize=(7.5, 7.5))
@@ -86,9 +102,11 @@ for m in range(plot.shape[0]):
         px.text(x=m,y=n,s=plot[m, n], va='center', ha='center', size='xx-large')
 
 # Sets the labels
-plt.xlabel('Predictions', fontsize=16)
-plt.ylabel('Actuals', fontsize=16)
-plt.title('Random Forest', fontsize=15)
+plt.xlabel('True label', fontsize=16)
+plt.ylabel('Predicted label', fontsize=16)
+plt.xticks([0, 1], ['Slow', 'Fast'])
+plt.yticks([0, 1], ['Slow', 'Fast'])
+plt.title('Random Forest', fontsize=20)
 plt.show() #need to close out of the matrix windows to continue to run
 
 ###LGBM###
@@ -97,6 +115,14 @@ lgbm.fit(X_train, y_train)
 
 pred_y = lgbm.predict(X_test)
 
+### Show the result of LGBM ###
+print("LGBM")
+print("acc", accuracy_score(y_test, pred_y))
+print("pre", precision_score(y_test, pred_y))
+print("rec", recall_score(y_test, pred_y))
+print("f-1", f1_score(y_test, pred_y))
+print()
+
 plot = confusion_matrix(y_test, pred_y)
 
 fig, px = plt.subplots(figsize=(7.5, 7.5))
@@ -106,9 +132,11 @@ for m in range(plot.shape[0]):
         px.text(x=m,y=n,s=plot[m, n], va='center', ha='center', size='xx-large')
 
 # Sets the labels
-plt.xlabel('Predictions', fontsize=16)
-plt.ylabel('Actuals', fontsize=16)
-plt.title('LGBM', fontsize=15)
+plt.xlabel('True label', fontsize=16)
+plt.ylabel('Predicted label', fontsize=16)
+plt.xticks([0, 1], ['Slow', 'Fast'])
+plt.yticks([0, 1], ['Slow', 'Fast'])
+plt.title('LGBM', fontsize=20)
 plt.show() #need to close out of the matrix windows to continue to run
 
 print('done')
