@@ -67,7 +67,7 @@ python train.py -lr [learning rate] -batch [batch] -epochs [training epoch] -dat
 ```
 train.py -lr 0.001 -batch 128 -epochs 50 -dataset ./dataset
 ```
-## Inferencing with a trained model
+## Inferencing with a trained CNN model
 You can check the trained model accuracy with a command below.
 ```
 python train.py --test -model_weights [path]
