@@ -10,9 +10,9 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
-from model import ClassifireNN, ClassifireCNN, CNN_1, CNN_EY
+from model import CNN_Classifier
 from preprocess import CustomDataset
 from torch.utils.tensorboard import SummaryWriter
 
@@ -25,7 +25,6 @@ def parse_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-lr', dest='lr', help='learning rate value', default=0.0001, type=float)
-    parser.add_argument('-dropout', dest='dropout', help='drop out', default=0.3, type=float)
     parser.add_argument('-epochs', dest='epochs', help='epochs', default=100, type=int)
     parser.add_argument('-batch', dest='batch', help='batch', default=16, type=int)
     parser.add_argument('-dataset', dest='dataset', help='dataset', default="./dataset", type=str)
@@ -38,7 +37,6 @@ def parse_args():
 args = parse_args()
 batch = args.batch
 lr = args.lr
-dropout = args.dropout
 epochs = args.epochs
 dataset = args.dataset
 
@@ -47,7 +45,6 @@ SEPARATOR = '======================================='
 print(SEPARATOR)
 print("Hyperparameter")
 print(f"lr             : {lr}")
-print(f"drop_out       : {dropout}")
 print(f"epochs         : {epochs}")
 print(f"batch          : {batch}")
 print(f"test           : {args.test}")
@@ -55,7 +52,7 @@ print(f"dataset        : {dataset}")
 print(SEPARATOR)
 
 # save model path
-eventid = f"{datetime.now().strftime('CNN-%Y.%m.%d')}_dropout_{dropout}_lr_{lr}"
+eventid = f"{datetime.now().strftime('CNN-%Y.%m.%d')}_lr_{lr}"
 output_dir = "./models/" + eventid
 os.makedirs(output_dir, exist_ok=True)
 
@@ -84,7 +81,7 @@ val_loader = DataLoader(val_dataset, batch_size=batch)
 test_loader = DataLoader(val_dataset, batch_size=batch)
 
 
-model = ClassifireCNN(drop_out=dropout).to(device)
+model = CNN_Classifier().to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 criterion = nn.BCELoss()
 
@@ -189,3 +186,8 @@ else:
 
     test_auc = accuracy_score(true_labels, pred_labels)
     print(classification_report(true_labels, pred_labels, target_names=["slow", "fast"]))
+
+    print(accuracy_score(true_labels, pred_labels))
+    print(f1_score(true_labels, pred_labels))
+    print(precision_score(true_labels, pred_labels))
+    print(recall_score(true_labels, pred_labels))
