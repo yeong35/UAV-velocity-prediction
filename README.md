@@ -1,14 +1,3 @@
-<!-- Good morning Everyone.
-As all teams were created, I would ask you to update your github readme file by 30th May. It doesn't need to be perfect but it requires several parts:
-(1) Group members name including all Purdue students: e.g., Minji Lee
-(2) Group members univ info: e.g., Purdue University
-(3) Project title
-(4) Research problem statement(s)
-(5) Research novelty (Significance)
-(6) Overview or diagram visual(s)
-(7) Environment settings (Must be very detailed with several steps. It can be updated until final weeks.)
-Please reach out to me if you have any questions. Thanks. -->
-
 # UAV Velocity Prediction Using an Acoustic Node
 
 ## Table of contents
@@ -36,7 +25,7 @@ UAV (Unmanned Aerial Vehicle) can be abused by bad actors for malicious purposes
     - There are many research that uses a camera, radar, lidar, or microphones to detect a UAV. This research focuses on using one microphone to collect our data, as using a microphone is cheaper than the previously mentioned equipment and is easier to collect data with it.
 
 ## System Overview
-![overview img](./img/ppt_readme_image0524.png)
+![overview img](./img/overview_072722.png)
 1. Microphone records UAV sounds, and a speed gun is used to detect the speed of the UAV (due to limitation, the speedgun used cannot detect anything under 10 mph).
 2. Recorded sound is arranged by a label that slow(0-9 mph) or fast(10~ mph).
 3. The data extract feature uses various methods.
@@ -65,14 +54,18 @@ pip install lightgbm
 ```
 
 ## Usage
-## Training a model
 You can use wav file dataset collected in person. After colleting dataset, you can train a model with a command below.
+## Training a Machine Learning models
 ```
-python train.py -lr [learning rate] -drop_out [drop out] -batch [batch] -epochs [training epoch] -dataset [dataset path]
+python MachineLearning.py
+```
+## Training a CNN model
+```
+python train.py -lr [learning rate] -batch [batch] -epochs [training epoch] -dataset [dataset path]
 ```
 - example
 ```
-train.py -lr 0.001 -drop_out 0.3 -batch 128 -epochs 50 -dataset ./dataset
+train.py -lr 0.001 -batch 128 -epochs 50 -dataset ./dataset
 ```
 ## Inferencing with a trained model
 You can check the trained model accuracy with a command below.
@@ -89,7 +82,7 @@ April. 19, 2022 - August. 3, 2022
 ## Authors
 - Eunyoung Bang
     - Kangwon National University
-    - Computer Engineering
+    - Department of Computer Science and Engineering
     - e_yeong@naver.com
 - Yeongmin Seo
     - DaeguCatholic University
