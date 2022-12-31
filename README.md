@@ -12,8 +12,8 @@
 
 ## Paper and presentation matrial
 All details of this project are explained on matrials listed below.
-- [MID-Paper](./PresentationAndPaper/mid_paper_060122.pdf)
-- [MID-Presentation](./PresentationAndPaper/mid_presentation_052722.pdf)
+- [Paper]()
+- [Presentation](./Presentation/IEEE_IRC_2022_presentation.pdf)
 
 ## Problem Statement
 UAV (Unmanned Aerial Vehicle) can be abused by bad actors for malicious purposes. One example is a kamikaze attack where a UAV crashed into one of the electrical grid in Pennsylvania in July 2020. There are many research that published how to detect malicious UAV using cameras, radars, and lidars. However, there is little research that predict UAV velocity. Using the previously mentioned equipment will be expensive. Therefore, a microphone will be used to collect the dataset. Then, that dataset will be used to predict if a UAV exceeds our given velocity boundary.
