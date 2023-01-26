@@ -12,7 +12,7 @@
 
 ## Paper and presentation matrial
 All details of this project are explained on matrials listed below.
-- [Paper]()
+- [Paper](https://ieeexplore.ieee.org/document/10023677)
 - [Presentation](./Presentation/IEEE_IRC_2022_presentation.pdf)
 
 ## Problem Statement
