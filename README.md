@@ -83,7 +83,7 @@ April. 19, 2022 - August. 3, 2022
 - Eunyoung Bang
     - Kangwon National University
     - Department of Computer Science and Engineering
-    - e_yeong@naver.com
+    - eyeong1126@gmail.com
 - Yeongmin Seo
     - DaeguCatholic University
     - Cyber Security
